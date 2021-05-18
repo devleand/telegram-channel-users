@@ -1,0 +1,43 @@
+#!/usr/bin/env php
+<?php
+
+use App\Config\Repository;
+use App\Console\ConsoleIO;
+use App\Result\ResultsManager;
+use App\Telegram\Madeline\Factory;
+use App\View\HtmlView;
+use App\View\UserDto;
+
+require __DIR__ . DIRECTORY_SEPARATOR . '..' . DIRECTORY_SEPARATOR . 'bootstrap' . DIRECTORY_SEPARATOR . 'bootstrap.php';
+
+$repository = Repository::getInstance();
+$consoleIO = new ConsoleIO();
+
+$MadelineProto = Factory::getInstance()->make($repository->getConfig('settings'));
+$MadelineProto->async(false);
+
+$MadelineProto->phoneLogin(
+    $consoleIO->readline('Enter your phone number (this number must already be signed up to telegram)')
+);
+$MadelineProto->completePhoneLogin(
+    $consoleIO->readline('Enter the code')
+);
+
+$users = $MadelineProto->getPwrChat(
+    $channel = $consoleIO->readline('Enter chat ID or invitation link')
+)['participants'];
+
+$resultFilePath = ResultsManager::getInstance()->put(
+    new HtmlView(
+        $channel,
+        function () use ($users) {
+            foreach ($users as $user) {
+                $user = $user['user'];
+
+                yield new UserDto($user['username'], $user['first_name'], $user['last_name'] ?? '');
+            }
+        }
+    )
+);
+
+$consoleIO->output("Result in $resultFilePath");

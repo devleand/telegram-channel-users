@@ -1,0 +1,11 @@
+{
+  "settings": {
+    "logger": {
+      "logger": 2
+    },
+    "app_info": {
+      "api_id": 100000,
+      "api_hash": "YOUR_APP_API_HASH"
+    }
+  }
+}

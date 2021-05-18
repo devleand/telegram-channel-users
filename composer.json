@@ -1,0 +1,23 @@
+{
+  "name": "devleand/telegram-channel-users",
+  "description": "description",
+  "minimum-stability": "stable",
+  "license": "proprietary",
+  "authors": [
+    {
+      "name": "devleand",
+      "email": "email@example.com"
+    }
+  ],
+  "require": {
+    "php": ">=7.4",
+    "danog/madelineproto": "6.*",
+    "ext-readline": "*",
+    "ext-json": "*"
+  },
+  "autoload": {
+    "psr-4": {
+      "App\\": "src/"
+    }
+  }
+}

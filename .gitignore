@@ -1,0 +1,8 @@
+/.idea/
+/vendor/
+/config/*.local.json
+/var/madeline/*
+/results/*
+/session.madeline
+/session.madeline.*
+/bin/*.log

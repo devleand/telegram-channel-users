@@ -34,7 +34,7 @@ $resultFilePath = ResultsManager::getInstance()->put(
             foreach ($users as $user) {
                 $user = $user['user'];
 
-                yield new UserDto($user['username'], $user['first_name'], $user['last_name'] ?? '');
+                yield new UserDto($user['username'] ?? '', $user['first_name'] ?? '', $user['last_name'] ?? '');
             }
         }
     )

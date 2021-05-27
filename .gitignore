@@ -5,4 +5,5 @@
 /results/*
 /session.madeline
 /session.madeline.*
+/*.log
 /bin/*.log
